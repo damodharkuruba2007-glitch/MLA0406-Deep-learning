@@ -50,3 +50,8 @@ plt.xlabel("Predicted")
 plt.ylabel("Actual")
 plt.title("Confusion Matrix")
 plt.show()
+
+OUTPUT:
+Precision: 0.9565217391304348
+Recall: 1.0
+F1 Score: 0.9777777777777777
