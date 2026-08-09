@@ -1,0 +1,44 @@
+import numpy as np
+from sklearn.neural_network import MLPClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+np.random.seed(42)
+
+n = 300
+
+theta = np.sqrt(
+    np.random.rand(n)
+) * 2 * np.pi
+
+r = 2 * theta + np.pi
+
+X1 = np.column_stack([
+    r * np.cos(theta),
+    r * np.sin(theta)
+])
+
+X2 = np.column_stack([
+    -r * np.cos(theta),
+    -r * np.sin(theta)
+])
+
+X = np.vstack([X1, X2])
+y = np.array([0] * n + [1] * n)
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+model = MLPClassifier(
+    hidden_layer_sizes=(3, 3, 3),
+    activation='logistic',
+    learning_rate_init=0.1,
+    max_iter=3000,
+    random_state=42
+)
+
+model.fit(X_train, y_train)
+
+print("Accuracy:",
+      accuracy_score(y_test, model.predict(X_test)))
